@@ -238,7 +238,7 @@ class Graf(nx.Graph): # sobre escribo mi clase grafo de graph
     u = 0                             # Empiezo con el nodo 0.
     H.add_node(u)
     aristas = sorted(                 # Obtengo las aristas ordenadas que conectan con u.
-        [ari for ari in list(self.edges.data("weight", default=1)) if ari[0] == u],
+        [ari for ari in list(self.edges.data("weight", default=1)) if ari[0] == u or ari[1] == u],
         #^Añado ari, para cada arista en la lista (las aristas de G con el dato de peso, si no tiene por default es 1), tal que se relacione con u.
         key = lambda n:n[2]
         )
@@ -250,7 +250,7 @@ class Graf(nx.Graph): # sobre escribo mi clase grafo de graph
         H.add_node(v)
         H.add_edge(u,v,weight = a[2])
         aristas = sorted( aristas +   # Actualizo la lista agregando las aristas salientes de v.
-            [ari for ari in list(self.edges.data("weight", default=1)) if ari[0] == v],
+            [ari for ari in list(self.edges.data("weight", default=1)) if ari[0] == v or ari[1] == v],
             key = lambda n:n[2]
             )
       a = aristas.pop(0)              # tomo la siguiente arista de menor peso.
